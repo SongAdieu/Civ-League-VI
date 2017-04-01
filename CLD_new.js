@@ -147,7 +147,7 @@ CivPlayersDrafter.on("message", message => {
                 if(!allCivs.hasOwnProperty(civ)){
                     continue;
                 }
-                if(bans.indexOf(civ) !== 1){
+                if(bans.indexOf(civ) !== -1){
                     continue;
                 }
                 validCivs.push(allCivs.civ);
