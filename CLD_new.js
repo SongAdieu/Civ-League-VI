@@ -199,3 +199,5 @@ CivPlayersDrafter.on("message", message => {
     }
     message.channel.sendMessage(messageString);
 });
+
+CivPlayersDrafter.login(Config.tokens.draftBot);
