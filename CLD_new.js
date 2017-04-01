@@ -193,7 +193,7 @@ CivPlayersDrafter.on("message", message => {
             }
             break;
         case 'civList':
-            messageString = '\nThe current civ list is as follows: ' + allCivs.keys().join(', ');
+            messageString = '\nThe current civ list is as follows: ' + Object.keys(allCivs).join(', ');
             break;
         case 'opCivList':
             messageString = '\nThe current OP civ list is as follows: ' + OPCivList.join(', ');
