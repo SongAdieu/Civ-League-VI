@@ -11,6 +11,8 @@ CivLeagueHelp.on("ready", () => {
     console.log("*CivLeagueHelp Activated*");
 });
 
+let emojiList = [':america:', ':russia'];
+
 CivLeagueHelp.on("message", message => {
     if (message.author.CivLeagueHelp) {
         return;
@@ -95,7 +97,11 @@ CivLeagueHelp.on("message", message => {
             `\n` +
             `\n` +
             `\n`
-        );
+        ).then(function(internalMessage){
+            emojiList.forEach(function(emoji){
+                internalMessage.react(emoji);
+            });
+        });
     }/*.setSteam*/
     else if (command === "setSteam") {
         message.channel.sendMessage(
