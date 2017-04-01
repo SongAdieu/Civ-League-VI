@@ -35,6 +35,53 @@ To draft a 4 player game with OP Civs banned: draft 4 OP\n
 To randomly assign players to a 2v2 game: teamSelect 2 2\n
 `;
 
+//Array of Players Available
+let civArrayTeamer = [
+    `*Discord Slot 1*`, //0
+    `*Discord Slot 2*`, //1
+    `*Discord Slot 3*`, //2
+    `*Discord Slot 4*`, //3
+    `*Discord Slot 5*`, //4
+    `*Discord Slot 6*`, //5
+    `*Discord Slot 7*`, //6
+    `*Discord Slot 8*`]; //7
+
+//Array of Civilizations Available
+let allCivs = {
+    America: '<:america:291788587329126402>*America*', //0
+    Arabia: '<:arabia:291788624041607170>*Arabia*', //1
+    Australia: '<:australia:291788657000710144>*Australia*', //2
+    Aztec: '<:aztec:291788693428109322>*Aztec*', //3
+    Brazil: '<:brazil:291788717587300353>*Brazil*', //4
+    China: '<:china:291788737573027840>*China*', //5
+    Egypt: '<:egypt:291788765847093248>*Egypt*', //6
+    England: '<:england:291788789079080971>*England*', //7
+    France: '<:france:291788812068323330>*France*', //8
+    Germany: '<:germany:291788833794818049>*Germany*', //9
+    Gorgo: '<:gorgo:291788859736588290>*Greece (**Gorgo**)*', //10
+    Pericles: '<:pericles:291789035289182208>*Greece (**Pericles**)*', //11
+    India: '<:india:291788886513025034>*India*', //12
+    Japan: '<:japanx:291788927424266250>*Japan*', //13
+    Kongo: '<:kongo:291788970805952513>*Kongo*', //14
+    Norway: '<:norway:291789000954478592>*Norway*', //15
+    Poland: '<:poland:291789066301603840>*Poland*', //16
+    Rome: '<:rome:291789096244871169>*Rome*', //17
+    Russia: '<:russia:291789137424416778>*Russia*', //18
+    Scythia: '<:scythia:291789172434272256>*Scythia*', //19
+    Spain: '<:spain:291789195691819010>*Spain*', //20
+    Sumeria: '<:sumeria:291789223365836813>*Sumeria*', //21
+    Macedon: `<:macedon:296313184841891840>*Macedon*`, //22
+    Persia: `<:persia:296313246279794689>*Persia*`}; //23
+
+let icons = {
+    purple: '<:civIconPurple:291784556489474049>',
+    white: '<:civIconWhite:293543789103022080>',
+    blue: '<:civIconBlue:296338624855932929>'
+};
+
+let teamIcons = [icons['white'], icons['blue'], icons['purple']],
+    civsPerPlayer = {2:5, 3:4, 4:3, 5:3, 6:3, 7:3, 8:2};
+
 let OPCivList = ['Australia', 'Macedon', 'Rome', 'Persia', 'Scythia', 'Sumeria'];
 
 CivPlayersDrafter.on("message", message => {
@@ -59,53 +106,7 @@ CivPlayersDrafter.on("message", message => {
         return;
     }
 
-    //Array of Players Available
-    let civArrayTeamer = [
-        `*Discord Slot 1*`, //0
-        `*Discord Slot 2*`, //1
-        `*Discord Slot 3*`, //2
-        `*Discord Slot 4*`, //3
-        `*Discord Slot 5*`, //4
-        `*Discord Slot 6*`, //5
-        `*Discord Slot 7*`, //6
-        `*Discord Slot 8*`]; //7
-
-    //Array of Civilizations Available
-    let allCivs = {
-        America: '<:america:291788587329126402>*America*', //0
-        Arabia: '<:arabia:291788624041607170>*Arabia*', //1
-        Australia: '<:australia:291788657000710144>*Australia*', //2
-        Aztec: '<:aztec:291788693428109322>*Aztec*', //3
-        Brazil: '<:brazil:291788717587300353>*Brazil*', //4
-        China: '<:china:291788737573027840>*China*', //5
-        Egypt: '<:egypt:291788765847093248>*Egypt*', //6
-        England: '<:england:291788789079080971>*England*', //7
-        France: '<:france:291788812068323330>*France*', //8
-        Germany: '<:germany:291788833794818049>*Germany*', //9
-        Gorgo: '<:gorgo:291788859736588290>*Greece (**Gorgo**)*', //10
-        Pericles: '<:pericles:291789035289182208>*Greece (**Pericles**)*', //11
-        India: '<:india:291788886513025034>*India*', //12
-        Japan: '<:japanx:291788927424266250>*Japan*', //13
-        Kongo: '<:kongo:291788970805952513>*Kongo*', //14
-        Norway: '<:norway:291789000954478592>*Norway*', //15
-        Poland: '<:poland:291789066301603840>*Poland*', //16
-        Rome: '<:rome:291789096244871169>*Rome*', //17
-        Russia: '<:russia:291789137424416778>*Russia*', //18
-        Scythia: '<:scythia:291789172434272256>*Scythia*', //19
-        Spain: '<:spain:291789195691819010>*Spain*', //20
-        Sumeria: '<:sumeria:291789223365836813>*Sumeria*', //21
-        Macedon: `<:macedon:296313184841891840>*Macedon*`, //22
-        Persia: `<:persia:296313246279794689>*Persia*`}; //23
-
-    let icons = {
-        purple: '<:civIconPurple:291784556489474049>',
-        white: '<:civIconWhite:293543789103022080>',
-        blue: '<:civIconBlue:296338624855932929>'
-    };
-
-    let teamIcons = [icons['white'], icons['blue'], icons['purple']],
-        civsPerPlayer = {2:5, 3:4, 4:3, 5:3, 6:3, 7:3, 8:2},
-        messageString = "";
+    let messageString = "";
 
     switch(command[0]){
         case 'draft':
@@ -163,7 +164,7 @@ CivPlayersDrafter.on("message", message => {
                 }
                 playerCounter += 1;
             }
-            message.channel.sendMesage(messageString);
+            message.channel.sendMessage(messageString);
             break;
         case 'teamSelect':
             if (command.length !== 3){
@@ -189,7 +190,7 @@ CivPlayersDrafter.on("message", message => {
                 }
                 teamCounter += 1;
             }
-            message.channel.sendMesage(messageString);
+            message.channel.sendMessage(messageString);
             break;
     }
 });
