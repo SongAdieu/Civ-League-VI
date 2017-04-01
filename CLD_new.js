@@ -102,7 +102,7 @@ CivPlayersDrafter.on("message", message => {
     */
 
     if (['draft', 'teamSelect', 'civList', 'opCivList'].indexOf(command[0]) === -1){
-        message.channel.sendMessage('\nInvalid command layout.  Valid commands:\n' + commandHelp);
+        // message.channel.sendMessage('\nInvalid command layout.  Valid commands:\n' + commandHelp);
         return;
     }
 
@@ -139,7 +139,7 @@ CivPlayersDrafter.on("message", message => {
                 messageString = "\nInvalid ban(s) provided: "+invalidBans.join(", ");
                 break;
             }
-            if ((allCivs.length - bans.length) < (civsPerPlayer[playerCount] * playerCount)){
+            if ((Object.keys(allCivs).length - bans.length) < (civsPerPlayer[playerCount] * playerCount)){
                 messageString = '\nToo many bans provided, please provide less bans';
                 break;
             }
