@@ -101,7 +101,7 @@ CivPlayersDrafter.on("message", message => {
     teamSelect <Teams> <Players Per Team>
     */
 
-    if (['draft', 'teamSelect'].indexOf(command[0]) === -1){
+    if (['draft', 'teamSelect', 'civList', 'opCivList'].indexOf(command[0]) === -1){
         message.channel.sendMessage('\nInvalid command layout.  Valid commands:\n' + commandHelp);
         return;
     }
@@ -112,13 +112,13 @@ CivPlayersDrafter.on("message", message => {
         case 'draft':
             let bans = [];
             if (command.length === 1){
-                message.channel.sendMessage('\nInvalid command layout.  Valid commands:\n' + commandHelp);
-                return;
+                messageString = '\nInvalid command layout.  Valid commands:\n' + commandHelp;
+                break;
             }
             let playerCount = Number(command[1]);
             if (playerCount > 8 || playerCount < 2){
-                message.channel.sendMessage('\nInvalid number of players for drafting.');
-                return;
+                messageString = '\nInvalid number of players for drafting.';
+                break;
             }
             if (command.length > 2){
                 // Bans!  Time to handle them.
@@ -136,12 +136,12 @@ CivPlayersDrafter.on("message", message => {
                 }
             }
             if(invalidBans.length !== 0){
-                message.channel.sendMessage("\nInvalid ban(s) provided: "+invalidBans.join(", "));
-                return;
+                messageString = "\nInvalid ban(s) provided: "+invalidBans.join(", ");
+                break;
             }
             if (allCivs.length - bans.length < civsPerPlayer[playerCount] * playerCount){
-                message.channel.sendMessage('\nToo many bans provided, please provide less bans');
-                return;
+                messageString = '\nToo many bans provided, please provide less bans';
+                break;
             }
             for (let civ in allCivs){
                 if(!allCivs.hasOwnProperty(civ)){
@@ -164,16 +164,15 @@ CivPlayersDrafter.on("message", message => {
                 }
                 playerCounter += 1;
             }
-            message.channel.sendMessage(messageString);
             break;
         case 'teamSelect':
             if (command.length !== 3){
-                message.channel.sendMessage('\nInvalid command layout.  Valid commands:\n' + commandHelp);
-                return;
+                messageString = '\nInvalid command layout.  Valid commands:\n' + commandHelp;
+                break;
             }
             if (command[1] * command[2] > 8){
-                message.channel.sendMessage('\nInvalid number of players for team generation.');
-                return;
+                messageString = '\nInvalid number of players for team generation.';
+                break;
             }
             let civTeamDrafter = shuffleList(civArrayTeamer);
             let title = 'Teamer Draft ('+command[2]+'v'+command[2]+')', teamMembers = command[2], teams = command[1];
@@ -190,7 +189,13 @@ CivPlayersDrafter.on("message", message => {
                 }
                 teamCounter += 1;
             }
-            message.channel.sendMessage(messageString);
+            break;
+        case 'civList':
+            messageString = '\nThe current civ list is as follows: ' + allCivs.keys().join(', ');
+            break;
+        case 'opCivList':
+            messageString = '\nThe current OP civ list is as follows: ' + OPCivList.join(', ');
             break;
     }
+    message.channel.sendMessage(messageString);
 });
