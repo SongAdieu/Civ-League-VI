@@ -175,15 +175,15 @@ CivPlayersDrafter.on("message", message => {
                 messageString = '\nInvalid number of players for team generation.';
                 break;
             }
-            let civTeamDrafter = shuffleList(civArrayTeamer);
+            let civTeamDrafter = shuffleList(civArrayTeamer.slice(0, command[2] * command[1] - 1));
             let title = 'Teamer Draft ('+command[2]+'v'+command[2]+')', teamMembers = command[2], teams = command[1];
             if (teams === 3) {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
             }
             messageString += '\n•|• **__' + title + '__** •|•\n*Based on Discord Placement in the Staging Teamer Voice Lobby.*';
-            let teamMemberCounter = 0, teamCounter = 0;
+            let teamCounter = 0;
             while (teamCounter < teams) {
-                let teamID = teamCounter + 1;
+                let teamID = teamCounter + 1, teamMemberCounter = 0;
                 messageString += '\n\n  | **Team ' + teamID + ' ' + teamIcons[teamCounter] + '** |';
                 while (teamMemberCounter < teamMembers) {
                     messageString += '\n    •' + civTeamDrafter.pop();
