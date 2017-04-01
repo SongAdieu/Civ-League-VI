@@ -27,12 +27,12 @@ function shuffleList(listToShuffle) {
 
 let commandHelp = `\n
 draft <Players> <Ban-1> <Ban-2> <Ban-n>\n
-teamSelect <Teams> <Players Per Team>\n
+teamSelect <Teams> <Players Per Team> <Channel>\n
 Examples:\n
 To draft a 4 player game with America banned: draft 4 America\n
 To draft a 4 player game with no bans: draft 4\n
 To draft a 4 player game with OP Civs banned: draft 4 OP\n
-To randomly assign players to a 2v2 game: teamSelect 2 2\n
+To randomly assign players to a 2v2 game from channel 3: teamSelect 2 2 3\n
 `;
 
 //Array of Players Available
@@ -167,7 +167,7 @@ CivPlayersDrafter.on("message", message => {
             }
             break;
         case 'teamSelect':
-            if (command.length !== 3){
+            if (command.length !== 4){
                 messageString = '\nInvalid command layout.  Valid commands:\n' + commandHelp;
                 break;
             }
@@ -175,7 +175,6 @@ CivPlayersDrafter.on("message", message => {
                 messageString = '\nInvalid number of players for team generation.';
                 break;
             }
-            let civTeamDrafter = shuffleList(civArrayTeamer.slice(0, command[2] * command[1]));
             let title = 'Teamer Draft ('+command[2]+'v'+command[2]+')', teamMembers = command[2], teams = command[1];
             if (Number(teams) === 3) {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
@@ -183,13 +182,19 @@ CivPlayersDrafter.on("message", message => {
             if (Number(teams) === 4) {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
             }
+            let channel = CivPlayersDrafter.channels.find('name', command[3]+' • Game (VA)');
+            if(channel.members.length < command[2] * command[1]){
+                messageString = '\nNot enough players in channel for team generation.';
+                break;
+            }
+            let civTeamDrafter = shuffleList(channel.members.array());
             messageString += '\n•|• **__' + title + '__** •|•\n*Based on Discord Placement in the Staging Teamer Voice Lobby.*';
             let teamCounter = 0;
             while (teamCounter < teams) {
                 let teamID = teamCounter + 1, teamMemberCounter = 0;
                 messageString += '\n\n  | **Team ' + teamID + ' ' + teamIcons[teamCounter] + '** |';
                 while (teamMemberCounter < teamMembers) {
-                    messageString += '\n    •' + civTeamDrafter.pop();
+                    messageString += '\n    •' + civTeamDrafter.pop().user.username;
                     teamMemberCounter += 1;
                 }
                 teamCounter += 1;
