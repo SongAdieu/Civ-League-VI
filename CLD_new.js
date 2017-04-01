@@ -32,7 +32,7 @@ Examples:\n
 To draft a 4 player game with America banned: draft 4 America\n
 To draft a 4 player game with no bans: draft 4\n
 To draft a 4 player game with OP Civs banned: draft 4 OP\n
-To randomly assign players to a 2v2 game from channel 3: teamSelect 2 2 3\n
+To randomly assign players to a 2v2 game: teamSelect 2 2\n
 `;
 
 //Array of Players Available
@@ -167,7 +167,7 @@ CivPlayersDrafter.on("message", message => {
             }
             break;
         case 'teamSelect':
-            if (command.length !== 4){
+            if (command.length !== 3){
                 messageString = '\nInvalid command layout.  Valid commands:\n' + commandHelp;
                 break;
             }
@@ -182,7 +182,7 @@ CivPlayersDrafter.on("message", message => {
             if (Number(teams) === 4) {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
             }
-            let channel = CivPlayersDrafter.channels.find('name', command[3]+' • Game (VA)');
+            let channel = CivPlayersDrafter.channels.find('name', '•|• Staging: FFA •|•');
             if(channel.members.length < command[2] * command[1]){
                 messageString = '\nNot enough players in channel for team generation.';
                 break;
