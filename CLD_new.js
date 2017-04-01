@@ -183,7 +183,7 @@ CivPlayersDrafter.on("message", message => {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
             }
             let channel = CivPlayersDrafter.channels.find('name', '•|• Staging: FFA •|•');
-            if(channel.members.length < command[2] * command[1]){
+            if(channel.members.keyArray().length < command[2] * command[1]){
                 messageString = '\nNot enough players in channel for team generation.';
                 break;
             }
@@ -199,7 +199,7 @@ CivPlayersDrafter.on("message", message => {
                     if (username === null){
                         username = user.user.username;
                     }
-                    messageString += '\n    •' + username;
+                    messageString += '\n    • @' + username;
                     teamMemberCounter += 1;
                 }
                 teamCounter += 1;
