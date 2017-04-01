@@ -150,7 +150,7 @@ CivPlayersDrafter.on("message", message => {
                 if(bans.indexOf(civ) !== -1){
                     continue;
                 }
-                validCivs.push(allCivs.civ);
+                validCivs.push(allCivs[civ]);
             }
             let randomCivs = shuffleList(validCivs);
             messageString += '\n•|• **__Player Choices__** •|•';
