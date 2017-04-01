@@ -92,8 +92,8 @@ CivPlayersDrafter.on("message", message => {
         return;
     }
 
-    let command = message.content.split(" ")[0];
-    command = command.slice(Config.dot.length).split(' ');
+    console.log(message.content);
+    let command = message.content.slice(Config.dot.length).split(" ");
     console.log(command);
     /*
     Command Format:
@@ -157,7 +157,8 @@ CivPlayersDrafter.on("message", message => {
             let playerCounter = 0;
             while (playerCounter < playerCount){
                 let civCounter = 0;
-                messageString += '\n**'+playerCounter+1+'**';
+                let playerID = playerCounter + 1;
+                messageString += '\n**'+playerID+'**';
                 while(civCounter < civsPerPlayer[playerCount]){
                     messageString += ' ' + randomCivs.pop();
                     civCounter += 1;
@@ -182,7 +183,8 @@ CivPlayersDrafter.on("message", message => {
             messageString += '\n•|• **__' + title + '__** •|•\n*Based on Discord Placement in the Staging Teamer Voice Lobby.*';
             let teamMemberCounter = 0, teamCounter = 0;
             while (teamCounter < teams) {
-                messageString += '\n\n  | **Team ' + teamCounter + 1 + ' ' + teamIcons[teamCounter] + '** |';
+                let teamID = teamCounter + 1;
+                messageString += '\n\n  | **Team ' + teamID + ' ' + teamIcons[teamCounter] + '** |';
                 while (teamMemberCounter < teamMembers) {
                     messageString += '\n    •' + civTeamDrafter.pop();
                     teamMemberCounter += 1;
