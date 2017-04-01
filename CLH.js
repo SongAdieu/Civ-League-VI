@@ -11,7 +11,7 @@ CivLeagueHelp.on("ready", () => {
     console.log("*CivLeagueHelp Activated*");
 });
 
-let emojiList = [':egypt:291788765847093248', ':america:291788765847093248', ':russia:291788765847093248'];
+let emojiList = [':egypt:291788765847093248', ':america:291788587329126402', ':russia:291789137424416778'];
 
 CivLeagueHelp.on("message", message => {
     if (message.author.CivLeagueHelp) {
