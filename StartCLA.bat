@@ -1,0 +1,1 @@
+START /B pm2 start CLA.js --name "CLA" --watch

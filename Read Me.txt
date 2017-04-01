@@ -1,0 +1,11 @@
+--Admin
+*clear
+
+--Member
+.help | .?
+.draftX (X = 2-8)
+.draftXvX (X = 2, 3, or 4)
+.setPTT
+.setOverlay
+.setSteam
+.joinSteam
