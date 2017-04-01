@@ -175,7 +175,7 @@ CivPlayersDrafter.on("message", message => {
                 messageString = '\nInvalid number of players for team generation.';
                 break;
             }
-            let civTeamDrafter = shuffleList(civArrayTeamer.slice(0, command[2] * command[1] - 1));
+            let civTeamDrafter = shuffleList(civArrayTeamer.slice(0, command[2] * command[1]));
             let title = 'Teamer Draft ('+command[2]+'v'+command[2]+')', teamMembers = command[2], teams = command[1];
             if (teams === 3) {
                 title = 'Teamer Draft (' + teamMembers + 'v' + teamMembers + 'v' + teamMembers + ')';
