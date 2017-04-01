@@ -195,10 +195,7 @@ CivPlayersDrafter.on("message", message => {
                 messageString += '\n\n  | **Team ' + teamID + ' ' + teamIcons[teamCounter] + '** |';
                 while (teamMemberCounter < teamMembers) {
                     let user = civTeamDrafter.pop();
-                    let username = user.nickname;
-                    if (username === null){
-                        username = user.user.username;
-                    }
+                    let username = user.user.username + '#' + user.user.discriminator;
                     messageString += '\n    • @' + username;
                     teamMemberCounter += 1;
                 }
